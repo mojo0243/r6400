@@ -247,8 +247,12 @@ func executor(in string) {
 	case "forget":
 		if !checkLiveAndActive() && len(c) == 3 && strings.TrimSpace(c[1]) == "spy" {
 			e := CheckSpyExists(strings.TrimSpace(c[2]))
+			b := strings.TrimSpace(c[2])
 			if e {
-				forgetSpy(active)
+				forgetSpy1(b)
+				forgetSpy2(b)
+				forgetSpy3(b)
+				forgetSpy4(b)
 			} else {
 				fmt.Println("[!] Spy not found")
 			}
@@ -533,10 +537,28 @@ func RemoveJob(i int, n string) {
 	exec(command)
 }
 
-func forgetSpy(n string) {
-	q := "DELETE FROM tasks,spys,tokens,results WHERE targ='%s'"
+func forgetSpy1(n string) {
+	q := "DELETE FROM tasks WHERE targ='%s'"
 	command := fmt.Sprintf(q, n)
 	exec(command)
+}
+
+func forgetSpy2(n string) {
+        q := "DELETE FROM spys WHERE targ='%s'"
+        command := fmt.Sprintf(q, n)
+        exec(command)
+}
+
+func forgetSpy3(n string) {
+        q := "DELETE FROM tokens WHERE targ='%s'"
+        command := fmt.Sprintf(q, n)
+        exec(command)
+}
+
+func forgetSpy4(n string) {
+        q := "DELETE FROM results WHERE targ='%s'"
+        command := fmt.Sprintf(q, n)
+        exec(command)
 }
 
 // Show available spys
