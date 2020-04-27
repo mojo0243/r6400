@@ -28,6 +28,9 @@ build_r6400:
 
 build_linux64:
 	cd client; GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(TARG)_linux64 -v -ldflags $(LDFLAGS); cd ../
+	
+build_rpi:
+	cd client; GOOS=linux GOARCH=arm GOARM=7 $(GOBUILD) -o $(TARG)_arm -v ldflags $(LDFLAGS); cd ../
 
 deps:
 	$(GOGET) gopkg.in/yaml.v2
